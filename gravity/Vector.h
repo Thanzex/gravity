@@ -22,6 +22,10 @@ public:
 	static float dist(Vector, Vector);
 	static Vector sub(Vector, Vector);
 	static Vector add(Vector, Vector);
+	static Vector mult(Vector, float);
+	static Vector frac(Vector, float);
+
+
 
 };
 
@@ -98,5 +102,25 @@ float Vector::dist(Vector a, Vector b)
 Vector Vector::sub(Vector a, Vector b)
 {
 	Vector s(a.x - b.x, a.y - b.y, a.z - b.z);
+	return s;
+}
+
+Vector Vector::add(Vector a, Vector b)
+{
+	Vector s(a.x + b.x, a.y + b.y, a.z + b.z);
+	return s;
+}
+
+Vector Vector::mult(Vector a, float b)
+{
+	Vector s(a);
+	s.times(b);
+	return s;
+}
+
+inline Vector Vector::frac(Vector a, float b)
+{
+	Vector s(a);
+	s.div(b);
 	return s;
 }

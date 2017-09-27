@@ -22,6 +22,10 @@ public:
 	Planet(Vector,float,float);
 	Planet(Vector, Vector);
 	Planet(Vector, Vector, float, float);
+	
+
+	sf::CircleShape shape;
+	//void Draw();
 
 private:
 
@@ -30,7 +34,7 @@ private:
 
 void Planet::Accelerate(Vector acc)
 {
-	velocity.plus(acc);
+	velocity.plus(Vector::mult(acc,TIMESTEP));
 }
 
 void Planet::SetPos(Vector pos)
@@ -41,9 +45,9 @@ void Planet::SetPos(Vector pos)
 void Planet::Update()
 {
 	Planet::Applyforce();
-
-	position.plus(velocity);
+	position.plus((Vector::mult(velocity, TIMESTEP)));
 	totalforce.times(0);
+	shape.setPosition(map_(position.x, PLAYFIELDMINX, PLAYFIELDMAXX, 0, WINWIDTH), map_(position.y, PLAYFIELDMINY, PLAYFIELDMAXY, 0, WINHEIGHT));
 }
 
  void Planet::Addforce(Vector a)
@@ -98,5 +102,8 @@ inline Planet::Planet(Vector a, Vector b, float m, float p)
 	size = p;
 	acceleration.set(Vector(0, 0, 0));
 	totalforce.set(Vector(0, 0, 0));
+	shape.setRadius(size);
 }
+
+
 
